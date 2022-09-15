@@ -1,0 +1,229 @@
+#include <iostream>
+
+using namespace std;
+void name(char** source_file, int length, int i) {
+    source_file[i][length] = '.';
+    source_file[i][length + 1] = 'p';
+    source_file[i][length + 2] = 'a';
+    source_file[i][length + 3] = 'r';
+    source_file[i][length + 4] = 't';
+    source_file[i][length + 6] = 0;
+
+}
+void main()
+{
+    int i8 = 0;
+    int encounter = 0;
+    int part_count = 0;
+    int point;
+    int point2;
+
+    char source_filename[80];
+    FILE* f2 = NULL;
+    cout << "Enter file name for separation: ";
+    cin >> source_filename;
+    fopen_s(&f2, source_filename, "rb");
+    // если файл удалось открыть
+
+
+    long file_size = 0;
+
+        // переместиться в конец открытого файла
+    fseek(f2, 0, SEEK_END);
+
+        // получить номер байта, где находится файловый указатель (размер файла)
+    file_size = ftell(f2);
+    fclose(f2);
+    cout << "point = ";
+    cin >> point;
+    if (file_size % point == 0) {
+        part_count = file_size / point;
+        point2 = point;
+    }
+    else {
+        part_count = (file_size / point) + 1;
+        point2 = file_size - point * (part_count - 1);
+    }
+
+
+    char** source_file = new char* [part_count];
+    for (int i = 0; i < part_count; i++)
+        source_file[i] = new char[80];
+
+
+    int length;
+    length = strlen(source_filename);
+    for (i8 = 0; i8 < part_count; i8++) {
+
+        for (int i = 0; i < length; i++) {
+            source_file[i8][i] = source_filename[i];
+            source_file[i8][i] = source_filename[i];
+        }
+
+        name(source_file, length, i8);
+        source_file[i8][length + 5] = i8 + 48;
+    }
+
+    f2 = NULL;
+
+    fopen_s(&f2, source_filename, "rb");
+    // если файл удалось открыть
+    if (f2 != NULL)
+    {
+
+        // переместиться в конец открытого файла
+
+        // получить номер байта, где находится файловый указатель (размер файла)
+
+        char* buffer = new char[file_size];
+
+        if (buffer != NULL)
+        {
+            // переместиться в начало открытого файла
+            fseek(f2, 0, SEEK_SET);
+
+            // чтение всего файла в память
+            fread(buffer, sizeof(char), file_size, f2);
+
+
+            int supercounter = 0;
+            int i = 0;
+            for (supercounter; supercounter < part_count; supercounter++) {
+                FILE* f = NULL;
+
+                fopen_s(&f, source_file[supercounter], "wb");
+                int size = 0;
+                if (supercounter != part_count - 1) {
+                    size = point;
+                }
+                else {
+                    size = point2;
+                }
+                char* buffer1 = new char[size];
+                int i1 = 0;
+                for (i1 = 0; i1 < size; i1++) {
+                    buffer1[i1] = buffer[i];
+                    i++;
+                }
+
+                if (f != NULL)
+                {
+                    // запись в файл из буфера
+                    fwrite(buffer1, sizeof(char), size, f);
+                    fclose(f);
+                    delete[] buffer1;
+                }
+                else
+                    cout << "Could not open destination file!!!" << endl;
+            }
+
+
+
+
+        }
+        else
+            cout << "The source file is too big!!!" << endl;
+
+        // закрытие файла
+        fclose(f2);
+        delete[] buffer;
+    }
+    else
+        cout << "Can`t open source file!" << endl;
+
+}
+
+
+
+
+
+
+
+
+
+
+#include <iostream>
+
+using namespace std;
+
+void main()
+{
+    int encounter = 0;
+    FILE* f = NULL;
+
+    char source_filename[80];
+    cout << "Enter source file name: ";
+    cin >> source_filename;
+
+    char dest_filename[80];
+    cout << "Enter destination file name: ";
+    cin >> dest_filename;
+    int pok;
+    cout << "input number of file devider";
+    cin >> pok;
+    FILE* f2 = NULL;
+
+    fopen_s(&f2, source_filename, "rb");
+    fopen_s(&f, dest_filename, "wb");
+
+    // если файл удалось открыть
+    if (f2 != NULL)
+    {
+        long long file_size = 0;
+
+        // переместиться в конец открытого файла
+        fseek(f2, 0, SEEK_END);
+
+        // получить номер байта, где находится файловый указатель (размер файла)
+        file_size = _ftelli64(f2);
+        int file_size_1 = file_size / pok;
+        int file_size_2 = file_size - pok * file_size_1;
+        int supercounter = 0;
+        fseek(f2, 0, SEEK_SET);
+        for (; supercounter < pok+1; supercounter++) {
+            int size = 0;
+
+            if (supercounter != pok) {
+                size = file_size_1;
+            }
+            else {
+                size = file_size_2;
+
+            }
+            char* buffer = new char[size];
+            int i = 0;
+            if (buffer != NULL)
+            {
+                // переместиться в начало открытого файла
+
+                // чтение всего файла в память
+                fread(buffer, sizeof(char), size, f2);
+
+
+                    // запись в файл из буфера
+                fwrite(buffer, sizeof(char), size, f);
+                delete[] buffer;
+            }
+           
+            else
+                cout << "Could not open destination file!!!" << endl;
+
+
+
+
+        }
+    }
+       
+
+        // закрытие файла
+        fclose(f2);
+        fclose(f);
+
+
+
+
+}
+
+
+
+

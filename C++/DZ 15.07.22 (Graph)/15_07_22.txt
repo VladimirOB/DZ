@@ -1,0 +1,6 @@
+﻿1. Для класса Graph добавить следующие методы:
+- RenameVertex(string oldName, string newName) - переименование вершины
+- PrintLinks(string title) - выводит названия и веса связанных с заданной вершин
+- Print() - выводит все вершины и связи между ними
+- DeleteLink(string vertex1, string vertex2) - удаление ребра между вершинами
+- DeleteVertex(string title) - удаление вершины со всеми связями
