@@ -1,0 +1,7 @@
+C:\DSSoft\Design Patterns\New\DP_Strategy\DP_Strategy\bin\Debug\DP_Strategy.exe.config
+C:\DSSoft\Design Patterns\New\DP_Strategy\DP_Strategy\bin\Debug\DP_Strategy.exe
+C:\DSSoft\Design Patterns\New\DP_Strategy\DP_Strategy\bin\Debug\DP_Strategy.pdb
+C:\DSSoft\Design Patterns\New\DP_Strategy\DP_Strategy\obj\Debug\DP_Strategy.csproj.AssemblyReference.cache
+C:\DSSoft\Design Patterns\New\DP_Strategy\DP_Strategy\obj\Debug\DP_Strategy.csproj.CoreCompileInputs.cache
+C:\DSSoft\Design Patterns\New\DP_Strategy\DP_Strategy\obj\Debug\DP_Strategy.exe
+C:\DSSoft\Design Patterns\New\DP_Strategy\DP_Strategy\obj\Debug\DP_Strategy.pdb
