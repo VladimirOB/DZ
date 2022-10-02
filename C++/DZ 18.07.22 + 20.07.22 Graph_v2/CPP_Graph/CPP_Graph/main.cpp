@@ -19,12 +19,12 @@ void main()
 	graph.AddLink("D", "E", "link3", 2);
 	graph.AddLink("C", "D", "link4", 21);
 	graph.AddLink("B", "E", "link4", 21);
-	cout << "Max Links = " << graph.MaxLinks() << endl;
+	//cout << "Max Links = " << graph.MaxLinks() << endl;
 	//graph.Print();
 	//cout << graph.title << endl;
 
-	//graph.GetRoute("A", "E");
-	//graph.PrintFoundPath();
+	graph.GetRoute("A", "E");
+	graph.PrintFoundPath();
 
 	/*graph.AddVertex("One", 34);
 	graph.AddVertex("Two", 45);
