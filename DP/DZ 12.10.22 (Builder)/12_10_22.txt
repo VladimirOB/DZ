@@ -1,0 +1,34 @@
+﻿1. Реализовать свою систему сериализации, которая позволяет сериализовать в файл поля класса, имеюшие типы:
+- Int32
+- Double
+- String
+- Boolean
+
+У сериализуемых полей должен быть атрибут [Storable]
+
+Пример программы:
+
+Student man = new Student("Alex", "Petrov", 23, "Donetsk", "Lenina", 3);
+
+try
+{               
+	// бинарная сериализация
+	MySerializer bf = new MySerializer();
+	FileStream fstream = new FileStream("student.dat", FileMode.Create, FileAccess.Write, FileShare.None);
+	bf.Serialize(fstream, man);
+	fstream.Close();
+}
+catch (Exception ex)
+{
+	Console.WriteLine(ex.Message);
+}
+
+// десериализация одиночного объекта
+FileStream fstream2 = File.OpenRead("student.dat");
+MySerializer bf2 = new MySerializer();
+Student man2 = (Student)bf2.Deserialize(fstream2);
+fstream2.Close();
+
+man2.Print();
+
+2. Реализовать паттерн "Builder" на примере программы "Архиватор".
