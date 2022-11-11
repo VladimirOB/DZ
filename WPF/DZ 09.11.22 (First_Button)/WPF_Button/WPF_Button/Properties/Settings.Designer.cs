@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WinForms_FileCommander.Properties {
+namespace WPF_Button.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

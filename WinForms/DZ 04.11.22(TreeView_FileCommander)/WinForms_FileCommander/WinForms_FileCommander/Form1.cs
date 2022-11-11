@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WinForms_FileCommander
 {
@@ -178,5 +179,35 @@ namespace WinForms_FileCommander
 
             fileView.EndUpdate();
         }
+
+        private void dirTree_MouseClick(object sender, MouseEventArgs e)
+        {
+            TreeNode node = dirTree.GetNodeAt(e.X, e.Y);
+            if(node != null)
+            {
+                this.Text = node.Text;
+            } 
+        }
+
+        private void dirTree_DragEnter(object sender, DragEventArgs e)
+        {
+			if ((e.AllowedEffect & DragDropEffects.Copy) != 0 && e.Data.GetDataPresent(DataFormats.FileDrop))
+			{
+				e.Effect = DragDropEffects.Copy;
+			}
+		}
+
+        private void dirTree_DragDrop(object sender, DragEventArgs e)
+        {
+			if (e.Data.GetDataPresent(DataFormats.FileDrop))
+			{
+                Point p = dirTree.PointToClient(new Point(e.X, e.Y));
+				TreeNode node = dirTree.GetNodeAt(p.X, p.Y);
+				if (node != null)
+				{
+					this.Text = node.Text;
+				}
+			}
+		}
     }
 }
