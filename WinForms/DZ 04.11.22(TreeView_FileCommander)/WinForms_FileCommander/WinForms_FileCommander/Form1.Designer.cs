@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
 			this.dirTree = new System.Windows.Forms.TreeView();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.fileView = new System.Windows.Forms.ListView();
+			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -44,6 +47,7 @@
 			this.splitContainer2.Panel2.SuspendLayout();
 			this.splitContainer2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			this.contextMenuStrip1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -96,6 +100,7 @@
 			this.dirTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.dirTree_AfterSelect);
 			this.dirTree.DragDrop += new System.Windows.Forms.DragEventHandler(this.dirTree_DragDrop);
 			this.dirTree.DragEnter += new System.Windows.Forms.DragEventHandler(this.dirTree_DragEnter);
+			this.dirTree.DragOver += new System.Windows.Forms.DragEventHandler(this.dirTree_DragOver);
 			this.dirTree.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dirTree_MouseClick);
 			// 
 			// pictureBox1
@@ -110,6 +115,8 @@
 			// 
 			// fileView
 			// 
+			this.fileView.AllowDrop = true;
+			this.fileView.ContextMenuStrip = this.contextMenuStrip1;
 			this.fileView.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.fileView.HideSelection = false;
 			this.fileView.Location = new System.Drawing.Point(0, 0);
@@ -117,6 +124,23 @@
 			this.fileView.Size = new System.Drawing.Size(389, 534);
 			this.fileView.TabIndex = 0;
 			this.fileView.UseCompatibleStateImageBehavior = false;
+			this.fileView.DragDrop += new System.Windows.Forms.DragEventHandler(this.fileView_DragDrop);
+			this.fileView.DragEnter += new System.Windows.Forms.DragEventHandler(this.fileView_DragEnter);
+			this.fileView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.fileView_MouseDown);
+			// 
+			// contextMenuStrip1
+			// 
+			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.refreshToolStripMenuItem});
+			this.contextMenuStrip1.Name = "contextMenuStrip1";
+			this.contextMenuStrip1.Size = new System.Drawing.Size(114, 26);
+			// 
+			// refreshToolStripMenuItem
+			// 
+			this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+			this.refreshToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+			this.refreshToolStripMenuItem.Text = "Refresh";
+			this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
 			// 
 			// statusStrip1
 			// 
@@ -152,6 +176,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
 			this.splitContainer2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			this.contextMenuStrip1.ResumeLayout(false);
 			this.statusStrip1.ResumeLayout(false);
 			this.statusStrip1.PerformLayout();
 			this.ResumeLayout(false);
@@ -168,6 +193,8 @@
         private System.Windows.Forms.ListView fileView;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-    }
+		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+		private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
+	}
 }
 

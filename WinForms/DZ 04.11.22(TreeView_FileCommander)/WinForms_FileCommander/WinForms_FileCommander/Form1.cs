@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -127,13 +128,8 @@ namespace WinForms_FileCommander
 
         private void dirTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            try
-            {
-                FillByFiles(e.Node.FullPath);
-            }
-            catch (Exception ex)
-            { }
-        }
+			FillByFiles(e.Node.FullPath);
+		}
 
         // заполнение listView файлами
         private void FillByFiles(string path)
@@ -145,39 +141,48 @@ namespace WinForms_FileCommander
             DirectoryInfo dirinfo = new DirectoryInfo(path);
             toolStripStatusLabel1.Text = path;
 
-            // Получение информации о файлах
-            FileInfo[] files = dirinfo.GetFiles();
-
-            // Обработка информации
-            fileView.LargeImageList.Images.Clear();
-            fileView.SmallImageList.Images.Clear();
-            int iconindex = 0;
-            fileView.LargeImageList.Images.Add(Bitmap.FromFile("note11.ico"));
-            fileView.SmallImageList.Images.Add(Bitmap.FromFile("note11.ico"));
-
-            // Перебрать все файлы по определённому пути и показать из в listView
-            foreach (FileInfo file in files)
+            try
             {
-                ListViewItem item = new ListViewItem(file.Name);
+				// Получение информации о файлах
+				FileInfo[] files = dirinfo.GetFiles();
 
-                // Получить иконку для текущего файла
-                Icon icon = Icon.ExtractAssociatedIcon(file.FullName);
+				// Обработка информации
+				fileView.LargeImageList.Images.Clear();
+				fileView.SmallImageList.Images.Clear();
+				int iconindex = 0;
+				fileView.LargeImageList.Images.Add(Bitmap.FromFile("note11.ico"));
+				fileView.SmallImageList.Images.Add(Bitmap.FromFile("note11.ico"));
 
-                // Добавить эту иконку в список картинок
-                fileView.LargeImageList.Images.Add(icon);
-                fileView.SmallImageList.Images.Add(icon);
-                iconindex++;
+				// Перебрать все файлы по определённому пути и показать из в listView
+				foreach (FileInfo file in files)
+				{
+					ListViewItem item = new ListViewItem(file.Name);
 
-                // Указать номер иконки для listView
-                item.ImageIndex = iconindex;
+					// Получить иконку для текущего файла
+					Icon icon = Icon.ExtractAssociatedIcon(file.FullName);
 
-                // Добавить пукт в listView
-                item.SubItems.Add(file.LastWriteTime.ToString());
-                item.SubItems.Add(file.Length.ToString());
-                fileView.Items.Add(item);
+					// Добавить эту иконку в список картинок
+					fileView.LargeImageList.Images.Add(icon);
+					fileView.SmallImageList.Images.Add(icon);
+					iconindex++;
+
+					// Указать номер иконки для listView
+					item.ImageIndex = iconindex;
+
+					// Добавить пукт в listView
+					item.SubItems.Add(file.LastWriteTime.ToString());
+					item.SubItems.Add(file.Length.ToString());
+					fileView.Items.Add(item);
+				}
+			}
+            catch(Exception ex)
+            {
+
             }
-
-            fileView.EndUpdate();
+            finally
+            {
+				fileView.EndUpdate();
+			}
         }
 
         private void dirTree_MouseClick(object sender, MouseEventArgs e)
@@ -201,13 +206,103 @@ namespace WinForms_FileCommander
         {
 			if (e.Data.GetDataPresent(DataFormats.FileDrop))
 			{
-                Point p = dirTree.PointToClient(new Point(e.X, e.Y));
+				// конвертирование экранных координат в координаты dirTree
+				Point p = dirTree.PointToClient(new Point(e.X, e.Y));
+
+                // получить узел, в который происходит вставка Drag-N-Drop
 				TreeNode node = dirTree.GetNodeAt(p.X, p.Y);
 				if (node != null)
 				{
-					this.Text = node.Text;
+					// Если перетаскивается список файлов
+					if (e.Data.GetDataPresent(DataFormats.FileDrop))
+					{
+						// Получить и напечатать список файлов
+						string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+						foreach (var sourceFilePath in fileList)
+						{
+							File.Copy(sourceFilePath, $"{node.FullPath}\\{Path.GetFileName(sourceFilePath)}");
+						}
+					}
+
+					FillByFiles(dirTree.SelectedNode.FullPath);
 				}
 			}
+		}
+
+        private void fileView_DragEnter(object sender, DragEventArgs e)
+        {
+			// Если пользователь копирует объект перетаскиванием и это список файлов и это не перетаскивание из listBox в него же
+			if (e.Data.GetDataPresent(DataFormats.FileDrop) && (e.AllowedEffect & DragDropEffects.Copy) != 0 && !e.Data.GetDataPresent("Myappformat"))
+			{
+				// Разрешить копирование
+				e.Effect = DragDropEffects.Copy;
+			}
+		}
+
+        private void fileView_DragDrop(object sender, DragEventArgs e)
+        {
+			// Если перетаскивается список файлов
+			if (e.Data.GetDataPresent(DataFormats.FileDrop))
+			{
+				// Получить и напечатать список файлов
+				string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop);
+				
+                if(dirTree.SelectedNode != null)
+                {
+                    foreach (var sourceFilePath in fileList)
+                    {
+                        File.Copy(sourceFilePath, $"{dirTree.SelectedNode.FullPath}\\{Path.GetFileName(sourceFilePath)}");
+                    }
+                }
+			}
+
+			FillByFiles(dirTree.SelectedNode.FullPath);
+		}
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			FillByFiles(dirTree.SelectedNode.FullPath);
+		}
+
+        private void fileView_MouseDown(object sender, MouseEventArgs e)
+        {
+			// Если есть выделенные строки
+			if (fileView.SelectedItems.Count > 0 && dirTree.SelectedNode != null)
+			{
+				// Создать контейнер для хранения данных
+				DataObject data1 = new DataObject();
+
+				// Положить содержимое выделенной в списке строки
+				StringCollection col = new StringCollection();
+
+                foreach (ListViewItem item in fileView.SelectedItems)
+                {
+					col.Add($"{dirTree.SelectedNode.FullPath}\\{item.Text}");
+				}
+				
+                data1.SetFileDropList(col);
+
+				// Добавить признак пользовательского формата в контейнер
+				data1.SetData("Myappformat", 0);
+
+				// НАЧАТЬ перетаскивание программно
+				DragDropEffects dde = DoDragDrop(data1, DragDropEffects.Copy);
+			}
+		}
+
+        private void dirTree_DragOver(object sender, DragEventArgs e)
+        {
+			// конвертирование экранных координат в координаты dirTree
+			Point p = dirTree.PointToClient(new Point(e.X, e.Y));
+
+			// получить узел, в который происходит вставка Drag-N-Drop
+			TreeNode node = dirTree.GetNodeAt(p.X, p.Y);
+
+            if(node != null)
+            {
+                dirTree.SelectedNode = node;
+            }
 		}
     }
 }
