@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BC00EE2D-FECB-4593-BC61-2635F8AC3C0E}</ProjectGuid>
+    <ProjectGuid>{F4A40240-7A28-471D-A6C4-5A893A010122}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WPF_Tooltips</RootNamespace>
-    <AssemblyName>WPF_Tooltips</AssemblyName>
+    <RootNamespace>WPF_Animation</RootNamespace>
+    <AssemblyName>WPF_Animation</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="admin.gif" />
+    <Resource Include="admin2.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

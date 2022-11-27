@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BC00EE2D-FECB-4593-BC61-2635F8AC3C0E}</ProjectGuid>
+    <ProjectGuid>{5C241A13-0203-4E82-8C50-571C1B81166B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WPF_Tooltips</RootNamespace>
-    <AssemblyName>WPF_Tooltips</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <RootNamespace>WPF_OpacityMask</RootNamespace>
+    <AssemblyName>WPF_OpacityMask</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -96,7 +96,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="admin.gif" />
+    <Resource Include="pic1.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
