@@ -18,7 +18,7 @@ select distinct state from authors
 -- having - это фильтр групп после группировки
 select type, count(*) kolvo, min(price) min, max(price) max, avg(price) avg 
 from titles
-where price is not null
+where price >=10
 group by type
 having count(*) > 2
 order by min(price) desc

@@ -37,11 +37,7 @@
                                   Storyboard.TargetProperty="Matrix"
                                   DoesRotateWithTangent="True"
                                 Duration="0:0:5">
-                                <MatrixAnimationUsingPath.PathGeometry>
-                                    <PathGeometry 
-                                        Figures="M 0,0 C 35,0 135,0 160,100 180,190 285,200 510,100" 
-                                        PresentationOptions:Freeze="True" />
-                                </MatrixAnimationUsingPath.PathGeometry>
+                                
                             </MatrixAnimationUsingPath>
                         </Storyboard>
                     </BeginStoryboard>
