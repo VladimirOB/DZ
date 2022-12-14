@@ -7,4 +7,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="170052-smertelnaya_bitva-mortal_kombat-sab_ziro-nizhe_nulya_minimalistskij-kuaj_lyan-7680x4320.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="170052-smertelnaya_bitva-mortal_kombat-sab_ziro-nizhe_nulya_minimalistskij-kuaj_lyan-7680x4320.jpg" />
+  </ItemGroup>
+
 </Project>

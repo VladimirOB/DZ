@@ -125,6 +125,12 @@ INTERSECT
 select * from titles
 where title NOT LIKE '%[0-9!@#$%^&*()_-,.\|?/]%'
 
+select * from titles
+where type = 'business'
+INTERSECT
+select * from titles
+where title NOT LIKE '%[^a-z ]%'
+
 select * from v2
 drop view v2
 
@@ -140,3 +146,6 @@ select * from v3
 
 
 SELECT CAST(1 AS FLOAT)/2 FROM titles
+
+insert into publishers (pub_id, pub_name,city,state,country)
+values('9955','Sun & Rain','London', Null,'UK ')

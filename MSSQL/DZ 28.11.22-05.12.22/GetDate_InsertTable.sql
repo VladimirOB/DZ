@@ -106,3 +106,4 @@ drop table my_res
 insert into my_res
 select * from authors
 where state = 'KS'
+
