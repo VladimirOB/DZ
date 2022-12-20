@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WPF_TextBlock.Properties {
+namespace WPF_Advanced_Templates.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

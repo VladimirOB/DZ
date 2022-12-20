@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AE13FA06-6F97-479A-BB7C-BF2E5B29CF4D}</ProjectGuid>
+    <ProjectGuid>{EDCFF54A-3E5C-4B5D-8666-CBF545B2ABEB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WPF_CombineGeometry</RootNamespace>
-    <AssemblyName>WPF_CombineGeometry</AssemblyName>
+    <RootNamespace>WPF_Advanced_Templates</RootNamespace>
+    <AssemblyName>WPF_Advanced_Templates</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -70,6 +70,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="People.cs" />
+    <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

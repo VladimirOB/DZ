@@ -97,54 +97,6 @@ select * from v1
 --удаление представления
 drop view v1
 
-use pubs
-
---1) показать книги, в названии которых отсутствуют цифры
-select * from titles
-where title NOT LIKE '%[0-9]%'
-
---2) показать книги для которых задана цена (не NULL)
-select * from titles
-where price is not null
-
---3) показать авторов, которые живут в штате 'CA' и работают по контракту (INTERSECT)
-select * 
-from authors
-where state = 'ca'
-INTERSECT
-select *
-from authors
-where contract = 1
-
---4) представление показывает книги в жанре 'business', в названии которых встречаются только буквы
-create view v2
-as
-select * from titles
-where type = 'business'
-INTERSECT
-select * from titles
-where title NOT LIKE '%[0-9!@#$%^&*()_-,.\|?/]%'
-
-select * from titles
-where type = 'business'
-INTERSECT
-select * from titles
-where title NOT LIKE '%[^a-z ]%'
-
-select * from v2
-drop view v2
-
---5) представление показывает название жанра, в котором написано больше всего книг с ценой больше $15
-create view v3
-as
-select top 1 type from titles
-where price >= 15
-group by type
-order by count(*) desc
-
-select * from v3
-
-
 SELECT CAST(1 AS FLOAT)/2 FROM titles
 
 insert into publishers (pub_id, pub_name,city,state,country)

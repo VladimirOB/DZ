@@ -59,6 +59,14 @@
                                     Duration="00:00:0.75"                
                                     BeginTime="0:0:0.25" />
 
+                                <DoubleAnimation
+                                    From="30"
+                                    To="370"
+                                    Duration="00:00:13"
+                                    RepeatBehavior="Forever"
+                                    AutoReverse="True"
+                                    Storyboard.TargetName="TextEffectRotateTransform"
+                                    Storyboard.TargetProperty="CenterX" />
                                 
 
                                 <Int32AnimationUsingKeyFrames

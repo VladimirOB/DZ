@@ -75,35 +75,3 @@ select * from au_results
 
 drop table au_results
 
-
---1) Показать год публикации самой дорогой книги
-select top 1 year(pubdate) from titles
---where price is not null
-order by price desc
-
---2) Показать сколько лет прошло между публикациями самой ранней и самой поздней книги
---select min(pubdate) min, max(pubdate) max from titles
-select DATEDIFF(yy, min(pubdate), max(pubdate)) from titles
-
---3) Увеличить даты публикаций книг в жанре 'business' на 2 месяца
---select * from titles
-update titles
-set pubdate = dateadd(mm, 2, pubdate)
-where type = 'business'
-
---4) Скопировать авторов, живущих в штате 'CA' и работающих по контракту в отдельную таблицу
-select * from authors
-
-select * 
-into my_res
-from authors
-where state = 'CA' and contract = 1;
-
-select * from my_res
-drop table my_res
-
---5) Добавить в эту таблицу авторов, живущих в штате 'KS'
-insert into my_res
-select * from authors
-where state = 'KS'
-
